@@ -1,0 +1,35 @@
+{
+  "name": "novelogic",
+  "publisher": "Aistra",
+  "displayName": "Novelogic",
+  "description": "Novelogic timeline script",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "novelogic",
+        "aliases": [
+          "Novelogic",
+          "novelogic"
+        ],
+        "extensions": [
+          ".ntl"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "novelogic",
+        "scopeName": "source.ntl",
+        "path": "./syntaxes/novelogic.tmLanguage.json"
+      }
+    ]
+  }
+}
