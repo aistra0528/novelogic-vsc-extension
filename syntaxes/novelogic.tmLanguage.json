@@ -9,68 +9,47 @@
 			"include": "#entities"
 		},
 		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#constants"
-		},
-		{
 			"include": "#variables"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#expressions"
 		}
 	],
 	"repository": {
 		"comments": {
-			"patterns": [
-				{
-					"name": "comment.line.number-sign",
-					"match": "(^|    )#.*$"
-				}
-			]
+			"name": "comment.line.number-sign.novelogic",
+			"match": "(?<=^|    )#.*(?=$)"
 		},
 		"entities": {
 			"patterns": [
 				{
-					"name": "entity.name.class",
-					"match": "(^|    )@[A-Za-z]\\w*$"
+					"name": "entity.name.type.novelogic",
+					"match": "(?<=^|    )@[A-Za-z]\\w*(?=$)"
 				},
 				{
-					"name": "entity.name.function",
-					"match": "(^|    )(-|<)> (([A-Za-z]\\w*)@)?([A-Za-z]\\w*)|(^|    )<-$"
+					"name": "entity.name.function.novelogic",
+					"match": "(?<=^<> |^-> |    <> |    -> )([A-Za-z]\\w*@)?[A-Za-z]\\w*(?=$)"
 				}
 			]
 		},
-		"keywords": {
-			"patterns": [
-				{
-					"name": "keyword.control",
-					"match": "\\b(if|elif|else|when)\\b"
-				},
-				{
-					"name": "keyword.operator",
-					"match": "\\b(and|or|is|not)\\b"
-				}
-			]
-		},
-		"constants": {
-			"patterns": [
-				{
-					"name": "constant.numeric",
-					"match": "\\b([\\d]+\\.)?\\d+\\b"
-				},
-				{
-					"name": "constant.language",
-					"match": "\\b(null|true|false)\\b"
-				}
-			]
+		"format_argument": {
+			"name": "variable.argument.format.novelogic",
+			"match": "{([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*}"
 		},
 		"variables": {
 			"patterns": [
 				{
-					"name": "variable.parameter",
-					"match": "(^|    )(([A-Za-z]\\w*)\\.)?([A-Za-z_]\\w*) (=|\\?=|\\+=|-=|\\*=|/=) "
+					"name": "variable.name.novelogic",
+					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= )"
+				},
+				{
+					"include": "#format_argument"
 				}
 			]
 		},
@@ -82,6 +61,105 @@
 				{
 					"name": "constant.character.escape",
 					"match": "\\\\."
+				},
+				{
+					"include": "#format_argument"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.operator.wordlike.gdscript",
+					"match": "\\b(and|or|not|in)\\b"
+				},
+				{
+					"name": "keyword.language.gdscript",
+					"match": "\\b(is|as)\\b"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"name": "constant.numeric.novelogic",
+					"match": "\\b([\\d]+\\.)?\\d+\\b"
+				},
+				{
+					"name": "constant.language.gdscript",
+					"match": "\\b(true|false|null)\\b"
+				}
+			]
+		},
+		"expression_argument": {
+			"name": "variable.argument.novelogic",
+			"match": "([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= |,|\\.|\\[|\\]|\\)|}|$|:$)"
+		},
+		"expression_patterns": {
+			"patterns": [
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#constants"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#functions"
+				},
+				{
+					"include": "#expression_argument"
+				}
+			]
+		},
+		"functions": {
+			"begin": "([A-Za-z]\\w*)(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.novelogic"
+				},
+				"2": {
+					"name": "punctuation.definition.arguments.begin.novelogic"
+				}
+			},
+			"end": "(\\))",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.arguments.end.novelogic"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#expression_patterns"
+				}
+			]
+		},
+		"expressions": {
+			"patterns": [
+				{
+					"begin": " = | \\?= | \\+= | -= | \\*= | /= ",
+					"end": "$",
+					"patterns": [
+						{
+							"include": "#expression_patterns"
+						}
+					]
+				},
+				{
+					"begin": "((?<=^|    )if |(?<=^|    )elif |(?<=^|    )else(?=:)|(?<=\") when )",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.flow.novelogic"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"include": "#expression_patterns"
+						}
+					]
 				}
 			]
 		}
