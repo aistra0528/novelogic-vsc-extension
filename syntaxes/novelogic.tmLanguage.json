@@ -46,7 +46,7 @@
 			"patterns": [
 				{
 					"name": "variable.name.novelogic",
-					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= )"
+					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )"
 				},
 				{
 					"include": "#format_argument"
@@ -139,7 +139,7 @@
 		"expressions": {
 			"patterns": [
 				{
-					"begin": " = | \\?= | \\+= | -= | \\*= | /= ",
+					"begin": " = | \\?= | \\+= | -= | \\*= | /= | \\?: ",
 					"end": "$",
 					"patterns": [
 						{
@@ -148,7 +148,7 @@
 					]
 				},
 				{
-					"begin": "((?<=^|    )if |(?<=^|    )elif |(?<=^|    )else(?=:)|(?<=\") when )",
+					"begin": "((?<=^|    )if |(?<=^|    )elif |(?<=^|    )else(?=:))",
 					"beginCaptures": {
 						"1": {
 							"name": "keyword.control.flow.novelogic"
