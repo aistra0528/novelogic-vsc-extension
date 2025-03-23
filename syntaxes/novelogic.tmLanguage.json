@@ -46,7 +46,7 @@
 			"patterns": [
 				{
 					"name": "variable.name.novelogic",
-					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )"
+					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? |: )"
 				},
 				{
 					"include": "#format_argument"
