@@ -15,6 +15,9 @@
 			"include": "#strings"
 		},
 		{
+			"include": "#text"
+		},
+		{
 			"include": "#functions"
 		},
 		{
@@ -30,7 +33,7 @@
 			"patterns": [
 				{
 					"name": "entity.name.type.novelogic",
-					"match": "(?<=^|    )@[A-Za-z]\\w*(?=$)"
+					"match": "(?<=^|    )(@[A-Za-z]\\w*|[A-Za-z]\\w*(?=\\.([A-Za-z]\\w*)(\\()))"
 				},
 				{
 					"name": "entity.name.function.novelogic",
@@ -46,7 +49,7 @@
 			"patterns": [
 				{
 					"name": "variable.name.novelogic",
-					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? |: )"
+					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )"
 				},
 				{
 					"include": "#format_argument"
@@ -88,6 +91,14 @@
 				{
 					"name": "constant.language.gdscript",
 					"match": "\\b(true|false|null)\\b"
+				}
+			]
+		},
+		"text": {
+			"patterns": [
+				{
+					"name": "constant.numeric.novelogic.dialogue",
+					"match": "(?<=^|    )[A-Za-z]\\w*: "
 				}
 			]
 		},
@@ -148,7 +159,7 @@
 					]
 				},
 				{
-					"begin": "((?<=^|    )if |(?<=^|    )elif |(?<=^|    )else(?=:))",
+					"begin": "((?<=^|    )if |(?<=^|    )elif |(?<=^|    )else(?=:)|(?<=^|    )- (.+(?= \\?: )|.+))",
 					"beginCaptures": {
 						"1": {
 							"name": "keyword.control.flow.novelogic"
