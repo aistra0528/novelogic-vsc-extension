@@ -33,7 +33,7 @@
 			"patterns": [
 				{
 					"name": "entity.name.type.novelogic",
-					"match": "(?<=^|    )(@[A-Za-z]\\w*|[A-Za-z]\\w*(?=\\.([A-Za-z]\\w*)(\\()))"
+					"match": "(?<=^|    )(@[A-Za-z]\\w*|[A-Z]\\w*(?=\\.[A-Za-z]\\w*(\\(| = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )))"
 				},
 				{
 					"name": "entity.name.function.novelogic",
@@ -43,13 +43,13 @@
 		},
 		"format_argument": {
 			"name": "variable.argument.format.novelogic",
-			"match": "{([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*}"
+			"match": "{[A-Za-z_]\\w*}"
 		},
 		"variables": {
 			"patterns": [
 				{
 					"name": "variable.name.novelogic",
-					"match": "(?<=^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )"
+					"match": "((?<=^|    |[A-Z]\\w*\\.)([a-z_]\\w*\\.[A-Za-z_]|[A-Za-z_])\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )|(?<=^|    )[a-z_]\\w*(?=\\.[A-Za-z_]\\w*\\())"
 				},
 				{
 					"include": "#format_argument"
@@ -103,8 +103,16 @@
 			]
 		},
 		"expression_argument": {
-			"name": "variable.argument.novelogic",
-			"match": "([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*(?= |,|\\.|\\[|\\]|\\)|}|$|:$)"
+			"patterns": [
+				{
+					"name": "entity.name.type.novelogic",
+					"match": "[A-Z]\\w*(?=\\.[A-Za-z_])"
+				},
+				{
+					"name": "variable.argument.novelogic",
+					"match": "((?<= |\\(|\\[|{)[a-z_]|(?<=\\.)[A-Za-z_])\\w*(?= |,|\\.|\\[|\\)|\\]|}|: |:$|$)"
+				}
+			]
 		},
 		"expression_patterns": {
 			"patterns": [
@@ -150,7 +158,7 @@
 		"expressions": {
 			"patterns": [
 				{
-					"begin": " = | \\?= | \\+= | -= | \\*= | /= | \\?: ",
+					"begin": "(?<=(^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*)( = | \\?= | \\+= | -= | \\*= | /= | \\?: )",
 					"end": "$",
 					"patterns": [
 						{
