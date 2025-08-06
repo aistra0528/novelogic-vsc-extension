@@ -27,17 +27,13 @@
 	"repository": {
 		"comments": {
 			"name": "comment.line.number-sign.novelogic",
-			"match": "(?<=^|    )#.*(?=$)"
+			"match": "(?<=^(    )*)#.*(?=$)"
 		},
 		"entities": {
 			"patterns": [
 				{
 					"name": "entity.name.type.novelogic",
-					"match": "(?<=^|    )(@[A-Za-z]\\w*|[A-Z]\\w*(?=\\.[A-Za-z]\\w*(\\(| = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )))"
-				},
-				{
-					"name": "entity.name.function.novelogic",
-					"match": "(?<=^<> |^-> |    <> |    -> )([A-Za-z]\\w*@)?[A-Za-z]\\w*(?=$)"
+					"match": "(?<=^(    )*)@[A-Za-z]\\w*|[A-Z]\\w*(?=\\.[A-Za-z]\\w*(\\(| = | \\+= | -= | \\*= | /= | \\?\\? ))"
 				}
 			]
 		},
@@ -49,7 +45,7 @@
 			"patterns": [
 				{
 					"name": "variable.name.novelogic",
-					"match": "((?<=^|    |[A-Z]\\w*\\.)([a-z_]\\w*\\.[A-Za-z_]|[A-Za-z_])\\w*(?= = | \\?= | \\+= | -= | \\*= | /= | \\?\\? )|(?<=^|    )[a-z_]\\w*(?=\\.[A-Za-z_]\\w*\\())"
+					"match": "(?<=^(    )*([A-Z]\\w*\\.)?)([a-z_]\\w*\\.[A-Za-z_]|[A-Za-z_])\\w*(?= = | \\+= | -= | \\*= | /= | \\?\\? )|(?<=^(    )*)[a-z_]\\w*(?=\\.[A-Za-z_]\\w*\\()"
 				},
 				{
 					"include": "#format_argument"
@@ -98,7 +94,7 @@
 			"patterns": [
 				{
 					"name": "constant.numeric.novelogic.dialogue",
-					"match": "(?<=^|    )[A-Za-z]\\w*: "
+					"match": "(?<=^(    )*)[A-Za-z]\\w*: "
 				}
 			]
 		},
@@ -158,7 +154,16 @@
 		"expressions": {
 			"patterns": [
 				{
-					"begin": "(?<=(^|    )([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*)( = | \\?= | \\+= | -= | \\*= | /= | \\?: )",
+					"begin": "\\${",
+					"end": "}",
+					"patterns": [
+						{
+							"include": "#expression_patterns"
+						}
+					]
+				},
+				{
+					"begin": "(?<=^(    )*([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*)( = | \\+= | -= | \\*= | /= )",
 					"end": "$",
 					"patterns": [
 						{
@@ -167,7 +172,21 @@
 					]
 				},
 				{
-					"begin": "((?<=^|    )if |(?<=^|    )elif |(?<=^|    )else(?=:)|(?<=^|    )- (.+(?= \\?: )|.+))",
+					"begin": "((?<=^(    )*)((-|<)> (([A-Za-z]\\w*@)?[A-Za-z]\\w*(?= \\?: |$))))",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.novelogic"
+						}
+					},
+					"end": "$",
+					"patterns": [
+						{
+							"include": "#expression_patterns"
+						}
+					]
+				},
+				{
+					"begin": "((?<=^(    )*)(if |elif |else(?=:)|- (.+(?= \\?: )|.+)))",
 					"beginCaptures": {
 						"1": {
 							"name": "keyword.control.flow.novelogic"
