@@ -15,7 +15,10 @@
 			"include": "#strings"
 		},
 		{
-			"include": "#text"
+			"include": "#dialogues"
+		},
+		{
+			"include": "#returns"
 		},
 		{
 			"include": "#functions"
@@ -33,7 +36,11 @@
 			"patterns": [
 				{
 					"name": "entity.name.type.novelogic",
-					"match": "(?<=^(    )*)@[A-Za-z]\\w*|[A-Z]\\w*(?=\\.[A-Za-z]\\w*(\\(| = | \\+= | -= | \\*= | /= | \\?\\? ))"
+					"match": "(?<=^(    )*)@[A-Za-z]\\w*(?=$)"
+				},
+				{
+					"name": "entity.name.type.novelogic",
+					"match": "(?<=^(    )*|\\.)[A-Z]\\w*(?=\\.[A-Za-z_])"
 				}
 			]
 		},
@@ -45,7 +52,7 @@
 			"patterns": [
 				{
 					"name": "variable.name.novelogic",
-					"match": "(?<=^(    )*([A-Z]\\w*\\.)?)([a-z_]\\w*\\.[A-Za-z_]|[A-Za-z_])\\w*(?= = | \\+= | -= | \\*= | /= | \\?\\? )|(?<=^(    )*)[a-z_]\\w*(?=\\.[A-Za-z_]\\w*\\()"
+					"match": "(?<=^(    )*|\\.)[a-z_]\\w*(?=\\.[A-Za-z_]| = | \\+= | -= | \\*= | /= | \\?\\? )"
 				},
 				{
 					"include": "#format_argument"
@@ -90,11 +97,19 @@
 				}
 			]
 		},
-		"text": {
+		"dialogues": {
 			"patterns": [
 				{
 					"name": "constant.numeric.novelogic.dialogue",
-					"match": "(?<=^(    )*)[A-Za-z]\\w*: "
+					"match": "(?<=^(    )*)[A-Za-z]\\w*(?=: .+$)"
+				}
+			]
+		},
+		"returns": {
+			"patterns": [
+				{
+					"name": "entity.name.function.novelogic",
+					"match": "(?<=^(    )*)<-(?=$)"
 				}
 			]
 		},
@@ -102,11 +117,11 @@
 			"patterns": [
 				{
 					"name": "entity.name.type.novelogic",
-					"match": "[A-Z]\\w*(?=\\.[A-Za-z_])"
+					"match": "\\b([A-Z]\\w*)\\b"
 				},
 				{
 					"name": "variable.argument.novelogic",
-					"match": "((?<= |\\(|\\[|{)[a-z_]|(?<=\\.)[A-Za-z_])\\w*(?= |,|\\.|\\[|\\)|\\]|}|: |:$|$)"
+					"match": "\\b[a-z_]\\w*\\b"
 				}
 			]
 		},
@@ -163,7 +178,7 @@
 					]
 				},
 				{
-					"begin": "(?<=^(    )*([A-Za-z]\\w*\\.)?[A-Za-z_]\\w*)( = | \\+= | -= | \\*= | /= )",
+					"begin": "(?<=^(    )*([A-Za-z]\\w*(\\.[A-Za-z_]\\w*)*\\.)?[A-Za-z_]\\w*( = | \\+= | -= | \\*= | /= ))",
 					"end": "$",
 					"patterns": [
 						{
