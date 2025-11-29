@@ -101,7 +101,11 @@
 			"patterns": [
 				{
 					"name": "constant.numeric.novelogic.dialogue",
-					"match": "(?<=^(    )*)[A-Za-z]\\w*(?=: .+$)"
+					"match": "(?<=^(    )*)[A-Za-z]\\w*(?=:([A-Za-z0-9]\\w*:)? .+$)"
+				},
+				{
+					"name": "constant.numeric.novelogic.dialogue",
+					"match": "(?<=^(    )*[A-Za-z]\\w*:)[A-Za-z0-9]\\w*(?=: .+$)"
 				}
 			]
 		},
