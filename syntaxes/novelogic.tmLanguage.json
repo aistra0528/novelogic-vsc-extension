@@ -12,9 +12,6 @@
 			"include": "#variables"
 		},
 		{
-			"include": "#strings"
-		},
-		{
 			"include": "#dialogues"
 		},
 		{
@@ -25,6 +22,9 @@
 		},
 		{
 			"include": "#expressions"
+		},
+		{
+			"include": "#strings"
 		}
 	],
 	"repository": {
@@ -35,7 +35,7 @@
 		"entities": {
 			"patterns": [
 				{
-					"name": "entity.name.type.novelogic",
+					"name": "entity.name.class.novelogic",
 					"match": "(?<=^(    )*)@[A-Za-z]\\w*(?=$)"
 				},
 				{
@@ -173,8 +173,18 @@
 		"expressions": {
 			"patterns": [
 				{
-					"begin": "\\${",
-					"end": "}",
+					"begin": "(\\${)",
+					"beginCaptures": {
+						"1": {
+							"name": "variable.argument.format.novelogic"
+						}
+					},
+					"end": "(})",
+					"endCaptures": {
+						"1": {
+							"name": "variable.argument.format.novelogic"
+						}
+					},
 					"patterns": [
 						{
 							"include": "#expression_patterns"
@@ -205,7 +215,7 @@
 					]
 				},
 				{
-					"begin": "((?<=^(    )*)(if |elif |else(?=:)|- (.+(?= \\?: )|.+)))",
+					"begin": "((?<=^(    )*)(if(?= .+:)|elif(?= .+:)|else(?=:)|- (.+(?= \\?: )|.+)))",
 					"beginCaptures": {
 						"1": {
 							"name": "keyword.control.flow.novelogic"
