@@ -88,8 +88,20 @@
 		"constants": {
 			"patterns": [
 				{
-					"name": "constant.numeric.novelogic",
-					"match": "\\b([\\d]+\\.)?\\d+\\b"
+					"name": "constant.numeric.binary.novelogic",
+					"match": "\\b(0b[01]+)\\b"
+				},
+				{
+					"name": "constant.numeric.hexadecimal.novelogic",
+					"match": "\\b(0x[0-9A-Fa-f]+)\\b"
+				},
+				{
+					"name": "constant.numeric.decimal.novelogic",
+					"match": "-?\\b(\\d+\\.)?\\d+\\b"
+				},
+				{
+					"name": "constant.language.gdscript",
+					"match": "\\b([A-Z_][A-Z_0-9]*)\\b"
 				},
 				{
 					"name": "constant.language.gdscript",
