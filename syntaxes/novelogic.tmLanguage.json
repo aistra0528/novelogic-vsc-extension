@@ -44,18 +44,11 @@
 				}
 			]
 		},
-		"format_argument": {
-			"name": "variable.argument.format.novelogic",
-			"match": "{[A-Za-z_]\\w*}"
-		},
 		"variables": {
 			"patterns": [
 				{
 					"name": "variable.name.novelogic",
 					"match": "(?<=^(    )*|\\.)[a-z_]\\w*(?=\\.[A-Za-z_]| (\\+|-|\\*|/|\\*\\*|%|&|\\||\\^|<<|>>)?= | \\?\\? )"
-				},
-				{
-					"include": "#format_argument"
 				}
 			]
 		},
@@ -69,7 +62,8 @@
 					"match": "\\\\."
 				},
 				{
-					"include": "#format_argument"
+					"name": "variable.argument.format.novelogic",
+					"match": "{[A-Za-z_]\\w*}"
 				}
 			]
 		},
@@ -185,13 +179,13 @@
 		"expressions": {
 			"patterns": [
 				{
-					"begin": "(\\${)",
+					"begin": "{",
 					"beginCaptures": {
 						"1": {
 							"name": "variable.argument.format.novelogic"
 						}
 					},
-					"end": "(})",
+					"end": "}",
 					"endCaptures": {
 						"1": {
 							"name": "variable.argument.format.novelogic"
@@ -213,7 +207,7 @@
 					]
 				},
 				{
-					"begin": "((?<=^(    )*)((-|<)> (([A-Za-z]\\w*@)?[A-Za-z]\\w*(?= \\?: |$))))",
+					"begin": "((?<=^(    )*)((-|<)> (([A-Za-z]\\w*@)?[A-Za-z]\\w*(?= :: |$))))",
 					"beginCaptures": {
 						"1": {
 							"name": "entity.name.function.novelogic"
@@ -227,7 +221,7 @@
 					]
 				},
 				{
-					"begin": "((?<=^(    )*)((if|elif|case)(?= .+:)|else(?=:)|when(?=( .+)?:)|- (.+(?= \\?: )|.+)))",
+					"begin": "((?<=^(    )*)((if|elif|case)(?= .+:)|else(?=:)|when(?=( .+)?:)|- (.+(?= :: )|.+)))",
 					"beginCaptures": {
 						"1": {
 							"name": "keyword.control.flow.novelogic"
