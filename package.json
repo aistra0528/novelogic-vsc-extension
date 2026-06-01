@@ -19,7 +19,7 @@
           "novelogic"
         ],
         "extensions": [
-          ".ntl"
+          ".nvs"
         ],
         "configuration": "./language-configuration.json"
       }
@@ -27,7 +27,7 @@
     "grammars": [
       {
         "language": "novelogic",
-        "scopeName": "source.ntl",
+        "scopeName": "source.nvs",
         "path": "./syntaxes/novelogic.tmLanguage.json"
       }
     ]
